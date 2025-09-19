@@ -2,6 +2,10 @@
 #import "@preview/pavemat:0.2.0": pavemat
 #show: thmbox-init()
 
+#let definition = definition.with(
+  display: "asd"
+)
+
 = Kommunikációs játékok
 #text(red)[
   *Ennek a fejezetnek a nagy resze (majdnem minden) a
@@ -17,7 +21,9 @@
 
 Cél: van két játékos, akik bármit ki tudnak számolni gyorsan, de egymás között nehezen kommunikálnak.
 
-// "Ez nem egy olyan valóságtól elrugaszkdott feltevés, hogy lokálisan mindent ki tudnak számolni. Hát az, hogy lokálisan mindent ki tudnak számolni, az elég elrugaszkodott feltevés."
+// "Ez nem egy olyan valóságtól elrugaszkdott feltevés, hogy lokálisan mindent
+// ki tudnak számolni. Hát az, hogy lokálisan mindent ki tudnak számolni, az
+// elég elrugaszkodott feltevés."
 // I'm dying because of those sentences.
 
 #definition[Kommunikációs játék][
