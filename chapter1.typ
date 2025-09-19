@@ -3,7 +3,23 @@
 #show: thmbox-init()
 
 #let definition = definition.with(
-  display: "asd"
+  variant: "Definíció"
+)
+
+#let theorem = theorem.with(
+  variant: "Tétel"
+)
+
+#let remark = remark.with(
+  variant: "Megjegyzés"
+)
+
+#let corollary = corollary.with(
+  variant: "Következmény"
+)
+
+#let example = example.with(
+  variant: "Példa"
 )
 
 = Kommunikációs játékok
@@ -137,7 +153,7 @@ Ennek a bizonyításához kell a következő definíció és tétel.
   is $kappa("DISJ") = n$.
 ]
 
-#proof[Corollary][
+#proof[Következmény][
   Elemszám szerint rendezve az $n$ elemű halmaz részhalmazait a sorokban, és
   a komplementereiket az oszlopokban 
     $

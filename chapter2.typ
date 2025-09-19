@@ -2,6 +2,26 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
 #show: thmbox-init()
 
+#let definition = definition.with(
+  variant: "Definíció"
+)
+
+#let theorem = theorem.with(
+  variant: "Tétel"
+)
+
+#let remark = remark.with(
+  variant: "Megjegyzés"
+)
+
+#let corollary = corollary.with(
+  variant: "Következmény"
+)
+
+#let example = example.with(
+  variant: "Példa"
+)
+
 = NP-n túl
 == Polinomialis hierarchia
 
@@ -177,7 +197,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 ]
 
 #theorem[Savitch][
-  Ha $forall n f(n) >= n$, akkor
+  Ha $f(n) >= n$, akkor
   $
     "NSPACE"(f(n)) subset.eq "DSPACE"(f^2 (n))
   $
@@ -388,6 +408,48 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 
 
   *2. $"TQBF" prop "GG"$*
+
+  Tehát a bizonyítás ezen részén azt kell belátnunk, hogy ha kapunk egy
+  teljesen kvantifikált Boole-formulát, akkor arra tudunk adni egy irányított
+  gráfot, amiben pontosan akkor van nyerő stratégiája Alíznak, ha a tqnf igaz.
+  Legyen példál a tqnf a következő:
+  $
+    phi = Q_1 x_1 Q_2 x_2 dots Q_l x_l f(x_1, x_2, dots, x_l).
+  $
+
+  Az irányított gráfot két részből foglyuk felépíteni: kvantifikált értékadások
+  (bal), és ellenőrzés (jobb). Az értékadás részben mindegyik $x_i$ változóra
+  létrehozunk egy kétirányú elágazást, ahol a balra vezető út azt jelenti, hogy
+  $x_i$ igaz, míg a jobbra vezető út azt, hogy $x_i$ hamis.
+
+  Az értékadásokat az alapján írjuk le, hogy éppen hogyan vannak kvantifikálva.
+  Ha létezési kvantort ($exists$) látunk, akkor Alízt kényszerítjük lépésre, ha
+  univerzális kvantort ($forall$), akkor Bobot kényszerítjük lépésre. Ha nem
+  pontosan felváltva szerepelnek a kvantorok, akkor adunk az ellenfélnek egy
+  triviális lépést ahol nincs választása csak alőre menni.
+
+  Például, ha egymás után van $forall x_i$ és $forall x_(i + 1)$, akkor egymás
+  után kéne lépni kettőt Bobnak, de ezt a szabályok nem engedik. Ezért azt
+  csináljuk hogy Bob lép egyet, azután beszúrunk egy választás nélküli direkt
+  élt a következő választási lehetőséghez, ezzel kényszerítve Alízt és
+  visszaadva Bobnak a lépés lehetőségét.
+
+  A második részben, ahol ellenőrizzük a formulát, úgy írjuk fel a gráfot hogy
+  a gyűjtő csúcsba lépést Bobra kényszerítjük, így Alíz jön soron. Alíz rámutat
+  egy blokk-ra ahol ő tudja hogy minden változó hamis. Így Bob bármelyik
+  változót választja a blokkból az hamis lesz. Azt hogy egy változó hamis úgy
+  mutatjuk meg, hogy miután Bob kiválasztotta, adunk Alíznak egy ingyen lépést
+  és utána bekötjük a gráf első felébe oda ahol választottuk $x_i$ értékét. Ha
+  $x_i$ tagadása szerepel a blokkban akkor abba a csúcsba kötjük be ami azt
+  reprezentálja, hogy $x_i$ hamis, különbe abba ami azt hogy $x_i$ igaz.
+
+  Mostmár könnyű meggondolni, hogy ebben az irányított gráfban az, hogy Alíznak
+  van nyerő stratégiája az ekvivalens azzal, hogy a tqnf igaz. Mivel az hogy
+  Alíznak van nyerő stratégiája pont azt jelenti hogy amikor Alíz nyer akkor
+  létezik ($exists$) olyan lépés, hogy Bob bármit lép ($forall$) még úgy is
+  Alíz fog nyerni.
+
+  A következő ábra talán jobban elmagyarázza az érvelést.
 
 #align(center)[
   #let nodes = (
