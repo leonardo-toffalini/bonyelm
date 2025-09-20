@@ -1,5 +1,7 @@
 #set page(numbering: "i")
 
+#set text(font: "Times New Roman")
+
 #show heading.where(level: 1): set text(size: 18pt)
 #show heading.where(level: 1): set text(size: 22pt)
 #show heading.where(level: 2): set text(size: 18pt) 

@@ -22,6 +22,10 @@
   variant: "Példa"
 )
 
+#let proposition = proposition.with(
+  variant: "Állítás"
+)
+
 = Kommunikációs játékok
 #text(red)[
   *Ennek a fejezetnek a nagy resze (majdnem minden) a

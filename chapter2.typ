@@ -22,6 +22,10 @@
   variant: "Példa"
 )
 
+#let proposition = proposition.with(
+  variant: "Állítás"
+)
+
 = NP-n túl
 == Polinomialis hierarchia
 
