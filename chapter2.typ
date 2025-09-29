@@ -26,6 +26,7 @@
   variant: "Állítás"
 )
 
+#pagebreak()
 = NP-n túl
 == Polinomialis hierarchia
 

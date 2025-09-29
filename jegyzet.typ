@@ -30,10 +30,10 @@
 
 #set page(numbering: "1")
 #include "chapter1.typ"
-#pagebreak()
 
 #include "chapter2.typ"
-#pagebreak()
 
 #include "chapter3.typ"
+
+#include "chapter4.typ"
 

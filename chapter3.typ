@@ -26,6 +26,7 @@
   variant: "Állítás"
 )
 
+#pagebreak()
 = Interaktív bizonyítások
 #example[
   Interaktív protokoll gráf _nem_ izomorfizmusra.
