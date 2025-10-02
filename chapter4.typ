@@ -129,15 +129,31 @@ in L$-re.
 ]
 
 #proof[Megjegyzés][
-  
-  RP definíciójából a várható lépésszám polinomiális, tehát $EE(t(w)) <= abs(w)^c$ valamilyen $c > 0$-ra.
+  RP definíciójából a várható lépésszám polinomiális, tehát $EE(t(w)) <=
+  abs(w)^c$ valamilyen $c > 0$-ra.
 
-  #text(red)[*TODO:*] Valami Markov egyenlőtlenség és ha kétszer futtatod akkor
-  valamiért okés?
+  A Markov egyenlőtlenség alapján:
+  $
+    PP(t(w) >= 8 abs(w)^c) < 1/8.
+  $
+
+  Kezdjük el futtatni a $T$ Turing-gépet mely a definícióban szerepel. Ha $T$
+  leáll $8 dot abs(w)^c$ lépésen belül, akkor azt válaszoljuk, amit $T$. Ha
+  viszont több mint $8 dot abs(w)^c$ lépésig fut, akkor elutasítunk.
+
+  Figyeljük meg, hogy a $w in.not L$, akkor nem tudunk tévedni, mivel vagy
+  leáll az adott idő alatt és elutasítunk, vagy nem áll le és akkor is
+  elutasítunk.
+
+  Ha viszont $w in L$, akkor kétszer futtatjuk $T$-t az előző feltételekkel és csak akkor utasítjuk el $w$-t, ha mindkétszer elutasítanánk. Ekkor annak az esélye, hogy így is elutasítjuk, az
+  $
+    (5/8)^2 < 1/2.
+  $
+
 ]
 
 #remark[
-  Az a sejtés, hogy $"RP" = "P"$, de ezt még nem sikerült bizonyítani, de nem
+  Az a sejtés, hogy $"RP" = "P"$. Ezt még nem sikerült bizonyítani, de nem
   sokan lepődnének meg ha valóban így lenne.
 ]
 
@@ -191,6 +207,13 @@ in L$-re.
   $
 ]
 
+#definition[$L^(=n)$][
+  $
+    L^(=n) = L inter Sigma_0^n
+  $
+  Tehát $L$-nek a pontosan $n$ hosszú szavai.
+]
+
 #theorem[Adleman][
   $
     "RP" subset.eq "P" \/ "poly"
@@ -198,14 +221,46 @@ in L$-re.
 ]
 
 #proof[
-  #text(red)[*TODO*]
-]
+  Legyen $L in "RP"$, azt kell belátnunk, hogy $L in "P" \/ "poly"$. Legyen
+  továbbá $n = abs(w)$ és tegyük fel, hogy $Sigma_0 = {0, 1}$.
 
-#definition[$L^(=n)$][
+  Ugye azt kell belátnunk, hogy van polinomiális hoszzú súgás, amivel már el
+  tudja dönteni egy Turing-gép egy szó tagságát, legyen ez a polinom $p$.
+  Így feltehetjük, hogy $L$-et ($"RP"$ értelemben) felismerő $T$ Turing-gép egy
+  $p(n)$ hosszú véletlen bitsorozatot használ.
+
+  Tehát egy $r in Sigma_0^p(n)$ véletlen bitsorozat meghatározza $T$ működését.
+
+  Azt mondjuk, hogy $S$ _jó_ $L^(=n)$-re, ha $forall w in L^(=n)$-re $exists r
+  in S$ úgy, hogy $T$ lefogadja a $(w, r)$ párost. Szavakban annyit jelent,
+  hogy $S$ bitsorozatok halmaza, melyben van olyan bitsorozat amellyel $T$
+  elfogadja $w$-t.
+
+  Nyilván $S = Sigma_0^(p(n))$ jó, mivel ebben benne van az összes $p(n)$
+  hosszú bitsorozat. A továbbiakban ezt a halmazt szeretnénk szűkíteni.
+
+  Tudjuk, hogy adott $w in L^(=n)$-re annak a valószínűsége, hogy $T$
+  elutasítja $w$-t véletlen $r$-el az legfeljebb $1 \/ 2$.
+
+  Ha $S$ pontosan $k$ darab véletlen $p(n)$ hosszú bitsorozatból áll, akkor
+  annak a valószínűsége, hogy $T$ elutasítja $w$-t minden $r in S$ bitsorozatra
+  az legfeljebb $1 \/ 2^k$.
+
+  Így annak a valószínűsége, hogy $exists w in L^(=n)$, hogy $T$ elutasítja
+  $w$-t minden $r in S$ bitsorozatra, az
   $
-    L^(=n) = L inter Sigma_0^n
+    < abs(L^(=n))/2^k <= 2^n/2^k.
   $
-  Tehát $L$-nek a pontosan $n$ hosszú szavai.
+  Ha $k = n + 1$, akkor az előző legfeljebb $1\/2$. Mivel ez a valószínűség
+  kisebb $1$-nél ezért kell léteznie egy olyan bitsorozatnak a $k$ közül ami jó
+  az összes $w$-re.
+
+  Tehát adott $n$ hosszú $w$ inputra súgni fogunk egy $k$ bitsorozatból álló
+  $S$ halmazt, amit képzelhetünk úgy mint $k$ darab $p(n)$ bitsorozat
+  konkatenálva, mert az osztály definíciójában csak egy bitsorozatot súghatunk.
+  Látjuk, hogy a súgás mérete $k dot p(n)$, ami polinomiális $n$-ben.
+
+  Végül lefuttatjuk mind a $k$ darab $p(n)$ hosszú bitsorozatra $T$-t.
 ]
 
 #definition[Ritka nyelv][
@@ -223,7 +278,7 @@ in L$-re.
 
 #theorem[Berman][
   Ha $L$ unáris és $"NP"$-teljes, akkor $"P" = "NP"$.
-]
+]<berman-thm>
 
 #proof[
   #text(red)[*TODO*]
@@ -241,6 +296,9 @@ in L$-re.
 ]
 
 #proof[
-  #text(red)[*TODO*]
+  Mondjuk, hogy $abs(A) <= n^c$, ekkor ugyanazt az érvelést követve, mint a
+  @berman-thm bizonyításában, ha nem találtunk kielégítő értékadást a fában
+  DFS-el, akkor legfeljebb $n dot n^c$ lépést tettünk. Ha viszont találtunk
+  kielégítő értékadást, akkor még gyorsabban megtaláltuk mint az előző esetben.
 ]
 
