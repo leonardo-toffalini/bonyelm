@@ -126,7 +126,7 @@ in L$-re.
 #remark[
   Ha $L in "RP"$, akkor feltehető, hogy polinomiális ideig működik az őt
   elfogadó Turing-gép.
-]
+]<proof-expected-poly-to-poly>
 
 #proof[Megjegyzés][
   RP definíciójából a várható lépésszám polinomiális, tehát $EE(t(w)) <=
@@ -302,3 +302,157 @@ in L$-re.
   kielégítő értékadást, akkor még gyorsabban megtaláltuk mint az előző esetben.
 ]
 
+#definition[
+  Azt mondjuk, hogy a $B$ nyelv $P\/ c log n$ időben visszevezethető az $A$
+  nyelvre, ha van olyan Turing-gép, mely $c log n$ méretű súgással $abs(w)$-ben
+  polinomiális időben ki tudja számolni $f(w)$, amelyre $w in B <==> f(w) in A$.
+
+  Jelölésben $B prop_(P\/ c log n) A$.
+]
+
+#corollary[
+  Ha $A$ ritka és $overline("SAT") prop_(P\/c log n) A$, akkor $"P" = "NP"$.
+]<corr-sat-comp-sugas>
+
+#proof[
+  A $T$ Turing-gép tippelje meg az $a_(abs(w))$ súgást, ha a $T$ gépg több mint
+  $(n+1) abs(A^(=n))$ lépést tesz meg akkor leállítjuk és tippelünk egy új
+  súgást.
+]
+
+#definition[
+  $"NP"\/f(n)$ azon $L$ nyelvek osztályát jelöli, melyekre van egy olyan $T$
+  nem determinisztikus Turing-gép, mely $w in L$-et egy $f(abs(w))$ méretű
+  súgással elfogadja.
+]
+
+#lemma[
+  Ha $A$ ritka és $A in "NP"$, akkor $overline(A) in "NP"\/c log n$.
+]<lemma-sparse-prop-np-over-clogn>
+
+#proof[
+  Legyen a $w$ inputra a $abs(w)$ hosszú szavak száma $A$-ban, azaz $l =
+  abs(A^(=abs(w)))$. A $T$ nem determinisztikus Turing-gép (nem
+  determinisztikusan) legenerálja az összes $abs(w)$ hosszú szót és mindegyikre
+  leelenörzi, hogy eleme-e $A$-nak, így megkapjuk $A^(=abs(w))$-t.
+
+  Ezután végigmegy $A^(=abs(w))$ összes $w_i$ elemén és leelenőrzi, hogy $w_i
+  =^? w$. Ha van olyan $i$, melyre $w_i = w$, akkor $w in A => w in.not
+  overline(A)$, különben $w in overline(A)$. Ezzel így akkor felismertük
+  $overline(A)$-t a súgással.
+]
+
+#proof[Mahaney][
+  Ha $A in "NPC"$ és $A$ ritka, akkor $"SAT" prop A$ és $overline("SAT") prop
+  overline(A)$, sőt ez a két visszavezetés ugyanazzal az $f$-el megy.
+
+  A @lemma-sparse-prop-np-over-clogn miatt, ha $A$ ritka és $A in "NP"$, akkor
+  $overline(A) in "NP"\/ c log n$. Tehát $overline("SAT") prop overline(A) in
+  "NP"\/ c log n$, ami miatt $overline("SAT") in "NP"\/c log n$.
+
+  Mivel $A in "NPC"$, ezért $overline("SAT") prop_(P\/c log n) A$ és így a
+  @corr-sat-comp-sugas miatt $"P" = "NP"$.
+]
+
+#definition[BPP][
+  BPP azon $L$ nyelvek osztályát jelöli, melyekre létezik egy randomizált $T$
+  Turing-gépt, hogy $w in L$ esetén $> 2/3$ eséllyel elfogad és $w in.not L$
+  esetén $< 1/3$ eséllyel fogad el. És a futásidő várhatóan polinomiális.
+
+  A nevét a _Bounded error Probabilistic Polynomial_ kifejezésből kapja.
+]
+
+#remark[
+  A következő táblázat ilusztrálja az esetek valószínűségét:
+
+  // You can also import those.
+#import table: cell, header
+#let green = rgb(200, 255, 200)
+#let red = rgb(255, 200, 200)
+
+#table(
+  columns: (1fr, 1fr, 1fr),
+  align: center,
+  header(
+    [#align(right)[*Válasz*]#align(left)[*Valóság*]],
+    [*Igaz*],
+    [*Hamis*],
+  ),
+  [*Igaz*],
+  [$>= 2\/3$],
+  [$<= 1\/3$],
+  [*Hamis*],
+  [$<= 1\/3$],
+  [$>= 2\/3$],
+)
+]
+
+#remark[
+  A BPP definíciójában is hasonlóan le lehet cserélni a _várhatóan_
+  polinomiális időt konkrét polinomiális időre a @proof-expected-poly-to-poly
+  érvelésével.
+]
+
+#remark[
+  A sejtés az, hogy $"P" = "BPP"$.
+]
+
+#remark[
+  Nyilván $"P" subset.eq "RP" subset.eq "BPP"$.
+]
+
+#definition[ZPP][
+  $
+    "ZPP" = "RP" inter "co-RP"
+  $
+]
+
+#remark[
+  A fenti definíció ekvivalens azzal, hogy olyan $L$ nyelvek vannak
+  $"ZPP"$-ben, melyekre van olyan $T$ probabilisztikus Turing-gép, mely hiba
+  nélül felismeri $L$-et. És ezt mind várhatóan polinomiális időben teszi meg.
+
+  Az osztály a nevét a _Zero (error) Probabilistic Polynomial_ kifejezésből
+  kapja.
+]
+
+#remark[
+  A tanult Schwartz-Zippel lemma érvén azt kapjuk, hogy a polinom különbség
+  feladat $"co-RP"$-beli. Azaz, azon $L$ nyelv, melyben $(p, q)$ polinom
+  párosok vannak, ahol $p equiv.not q$.
+]
+
+#proposition[
+  Ha a $T$ probabilisztikus Turing-gép azonosan egyenletes eloszlás független
+  bitekez használ, akkor ekvivalens definíciókat kapunk az előzőkkel.
+]
+
+#proof[
+  Nem bizonyítjuk.
+]
+
+#theorem[
+  $
+    "BPP" in Sigma_2 inter Pi_2
+  $
+]
+
+#proof[
+  #text(red)[*TODO*]
+]
+
+#proposition[
+  $FF_2^m$ $S_X$ _kevés_ eltolásával fedhető, ha $x in L$. \
+  Azaz $abs(S_X) >= (1 - 2^(-n))2^m$. \
+  Azaz $exists r_1, dots, r_k in FF_2^m$, ahol $k = ceil(m/n)+1$
+  úgy, hogy
+  $
+    union.big_(i=1)^k (S_X + r_i) = FF_2^m.
+  $
+]
+
+#proof[
+  #text(red)[*TODO*]
+]
+
+#pagebreak()
