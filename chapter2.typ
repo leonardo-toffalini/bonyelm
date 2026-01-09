@@ -141,7 +141,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
     "EXACT_INDEPENDENT" := { (G, m) : alpha(G) = m }
   $
   azaz, azon $G$ grafok es $m$ szamok parosai, melyekre $G$ fuggetlensegi szama
-  nagyobb pont $m$.
+  pont $m$.
 ]
 
 #proposition[
@@ -197,7 +197,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
     x in L <=> exists (y_1, y_2) forall dots Q y_(i+1) S(x, (y_1, y_2), dots, y_i).
   $
   A jobboldalon $i$ darab kvantor van es pont abban a sorrendben mint ahogy
-  kell lenniuk $Sigma_i$ definiciojahoz. Tehat belattuk, hogy ha $L \in
+  kell lenniuk $Sigma_i$ definiciojahoz. Tehat belattuk, hogy ha $L in
   Sigma_(i+1)$ akkor $L in Sigma_i$.
 ]
 
@@ -212,7 +212,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
   Legyen $L in "NSPACE"(f(n))$ egy tetszőlegese nyelv, a célunk megmutatni,
   hogy $L$ felismerhető egy determinisztikus Turing-géppel $f^2(n)$ tárban.
 
-  Figyeljük meg, hogy aha egy Turing-gép $t$ tárat használ futása alatt, akkor
+  Figyeljük meg, hogy ha egy Turing-gép $t$ tárat használ futása alatt, akkor
   legfeljebb $O(2^(c dot t))$ különböző konfigurációba kerülhet.
 
   Tudjuk, hogy van egy nemdeterminisztikus Turing-gép mely felismeri az $L$
@@ -265,8 +265,8 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 ]
 
 #definition[tqbf -- Totally Quantified Boolean Formula][
-  Azt mondju, hogy $phi$ egy teljesen kvantifikált Boole-formula, ha olyan
-  alaba írható, hogy 
+  Azt mondjuk, hogy $phi$ egy teljesen kvantifikált Boole-formula, ha olyan
+  alakba írható, hogy 
   $
     phi = Q_1 x_1 Q_2 x_2 dots Q_l x_l f(x_1, x_2, dots, x_l),
   $
@@ -316,10 +316,10 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
   lennie.
 
   Az ötlet, hogy újra felhasználjuk az $"st-conn"$ feladatot. Ha fel tudjuk
-  írni az $"st-conn"$ feladatot mint egy polinomiálisan méretű tqbf a kezdő
+  írni az $"st-conn"$ feladatot mint egy polinomiális méretű tqbf a kezdő
   csúcsra és az elfogadó csúcsok reprezentására a konfiguráció gráfra, akkor
-  készen lennénk. Mivel bármilyen polinoiális tárban felismerhető nyelvet át tudunk
-  írni polinomiális időben egy polinomiálisan hosszú tqnf-re.
+  készen lennénk. Mivel bármilyen polinomiális tárban felismerhető nyelvet át tudunk
+  írni polinomiális időben egy polinomiálisan hosszú tqbf-re.
 
   Nézzük mit ad a köztes csúcs trükk amit már használtunk a Savitch tétel
   bizonyításában:
