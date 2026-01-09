@@ -32,7 +32,7 @@
 
 #definition[Polinomiális reláció][
   Azt mondjuk, hogy $P(x, y_1, y_2, dots, y_l)$ egy polinomiális reláció, ha
-  $exists i$ úgy, hogy $forall i: |y_i| <= |x|^c$ es $P(x, y_1, dots, y_i)$
+  $exists c$ úgy, hogy $forall i: |y_i| <= |x|^c$ es $P(x, y_1, dots, y_i)$
   kiszámolható $|x|$-ben polinomimális időben.
 ]
 
@@ -50,7 +50,7 @@
 ]
 
 #definition[$Pi_i$][
-  Tetszoleges $L$ nyelvre $L in \Pi_i <=> exists P(x, y_1, dots, y_i)$
+  Tetszoleges $L$ nyelvre $L in Pi_i <=> exists P(x, y_1, dots, y_i)$
   polinomialis relacio ugy, hogy $x in L <=> forall y_1 exists y_2 forall
   y_3 dots tilde(Q) y_i$ ugy, hogy $P(x, y_1, y_2, dots, y_i)$ teljesul.
   Ahol $tilde(Q)$ a kovetkezokeppen van definialva:
@@ -124,7 +124,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 
 #definition[Polinomialis Hierarchia][
   $
-    "PH" = union.big_{i=1}^infinity Sigma_i = union.big{i=1}^infinity Pi_i
+    "PH" = union.big_(i=1)^infinity Sigma_i = union.big_(i=1)^infinity Pi_i
   $
 ]
 
@@ -161,7 +161,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 ]
 
 #theorem[
-  Ha $exists i >= 1$ amire $Sigma_i = Pi_i$, akkor $Sigma_{i+1} =
+  Ha $exists i >= 1$ amire $Sigma_i = Pi_i$, akkor $Sigma_(i+1) =
   Pi_(i+1)$, amibol tovabb kovetkezik, hogy $"PH" = Sigma_i = Pi_i$. Azt
   mondjuk, hogy a polinommialis hierarchia #emph[osszeomlik] az $i$-edik
   szintre.
@@ -171,7 +171,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
   Mivel tudjuk, hogy $Sigma_i subset.eq Sigma_(i+1)$, ezert eleg azt
   belatnunk, hogy $Sigma_(i+1) subset.eq Sigma_i$ es ezzel belatjuk, hogy
   $Sigma_i = Sigma_(i+1)$. Hasonlo modon be tudjuk latni hogy $Pi_i =
-  \i_(i+1)$.
+  Pi_(i+1)$.
 
   Legyen $L in Sigma_(i+1)$ tetszoleges nyelv, bizonyitsuk be hogy $L in
   Sigma_i$. Mivel $L in Sigma_(i+1)$, ezert letezik egy $P$ polinomialis
@@ -184,7 +184,7 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
     x in L <=> exists y_1 : (x, y_1) in L'.
   $
   Figyelem, itt csak annyi tortent hogy beillesztettuk egy extra $y_1$ valtozot
-  a letezes ($exists$) kvantorral a $\Pi_i$ definicio ele, igy kaptunk egy
+  a letezes ($exists$) kvantorral a $Pi_i$ definicio ele, igy kaptunk egy
   definiciot $Sigma_(i+1)$-re.
 
   Mivel $Sigma_i = Pi_i$, ezert $L' in Sigma_i$, tehat letezik egy

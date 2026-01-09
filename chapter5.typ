@@ -278,3 +278,5 @@
   A bizonyítás a következő cikk alapján hangzott el előadáson:
   #link("https://dl.acm.org/doi/pdf/10.1145/28395.28404")
 ]
+
+#pagebreak()
