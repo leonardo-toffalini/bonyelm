@@ -26,66 +26,6 @@
   variant: "Állítás"
 )
 
-== Zero Knowledge Proofs
-#definition[Zero Knowledge Proof][
-  Egy zero knowledge proof (ZK) két szereplő interakcója: Merlin (a bizonyító)
-  és Artúr (az ellenörző).
-
-  Egy ZK-nak a következő három tulajdonságot kell teljesítenie:
-  + Ha a bizonyítandó állítás igaz, akkor egy őszinte Artúrt meg tudja győzni
-    egy őszinte Merlin.
-
-  + Ha az állítás hamis, akkor még csalással sem tudja Merlin meggyőzni Artúrt,
-    legfeljebb egy kis valószínűséggel téved Artúr.
-
-  + Ha az állítás igaz, akkor Artúr nem tud meg semmi extra információt azon
-    kívül hogy igaz az állítás Merlin bizonyításából.
-]
-
-#remark[
-  Az első két feltétel tehát csak annyit jelent, hogy ez egy interaktív
-  bizonyítás. A lényeg pont az hogy Artúr nem tud meg semmi mást azon kívül
-  hogy igaz az állítás.
-]
-
-#example[Gráf nem izomorfizmus][
-  Adott két gráf $G_1, G_2$ és el szeretnénk dönteni, hogy $G_1 tilde.eq.not G_2$.
-
-  Artúr újra címezi a csúcsokat és megmutatja az egyik gráfot. Erre Merlinnek
-  meg kell mondania, hogy $G_1$-et vagy $G_2$-t mutatta fel Artúr.
-]
-
-#example[Hamilton kör létezése][
-  Adott egy $G$ gráf, mely ismert Merlin és Artúr számára is. Merlinnek be kell
-  bizonyítania, hogy ő ismer egy Hamilton-kört $G$-ben.
-
-  + Merlin újra címezi $G$ csúcsait egy permutációval, ezzel létrehoz egy $H$
-    gráfot, mely persze izomorf $G$-vel.
-  + Fölírja $H$ éleit egy-egy lapra és fejjel lefelé elhelyezi őket az asztalra
-    és mostmár nem nyúlhat hozzájük addig amíg Artúr meg nem engedi.
-  + Most Artúr a következő kettő eset közül választ: \
-    - Merlin, bizonyítsd be, hogy $H$ valóban izomorf $G$-vel.
-    - Merlin mutasd meg a Hamilton-körödet $H$-ban.
-
-  1. Ha azt kell bizonyítania Merlinnek, hogy $G tilde.eq H$, akkor felfordítja
-     az összes lapot és elmondja a permutációt amivel újra cimkézte a
-  csúcsokat. Ezzel Artúr meg tud győződni, hogy valóban izomorf a két gráf.
-
-  2. Ha viszont $H$-ban kell mutatnia Merlinnek egy Hamilton-kört, akkor felfedi csak azokat az éleket amik Hamilton-kört alkotnak.
-]
-
-#proof[
-  Az előző bizonyítás valóban egy zero knowledge proof, mivel ha Merlin ismert
-  egy Hamilton-kört $G$-ben, akkor erről meggyőződött Artúr. Ha Merlin nem
-  ismert egy Hamilton-kört $G$-ben, akkor még Artúr kérdése előtt el kellett
-  döntenie, hogy vagy egy valid izomorf gráfot kreál vagy egy valid Hamilton
-  kört, ami nem izomorf $G$-vel. Mivel Merlin nem tudja előre Artúr kérdését
-  ezért mindig $1 \/ 2$ eséllyel lebukik.
-
-  Másrészről, Artúr nem tudott meg semmi többet a Hamilton körről mint, hogy létezik, mivel akkor is amikor Merlin mutat neki egy Hamilton-kört akkor is csak $H$-ban mutat fel $n$ élet ami $n$ csúcsot tartalmaz, de ezt már eddig is tudta Artúr.
-]
-
-#pagebreak()
 = Véletlen bonyolultság osztályok
 
 Volt, hogy $L in "NP"$ pontosan akkor, ha létezik polinomiális tanu minden $w
@@ -138,18 +78,24 @@ in L$-re.
   $
 
   Kezdjük el futtatni a $T$ Turing-gépet mely a definícióban szerepel. Ha $T$
-  leáll $8 dot abs(w)^c$ lépésen belül, akkor azt válaszoljuk, amit $T$. Ha
+  leáll $8 dot abs(w)^c$ lépésen belül, akkor azt válaszoljuk amit $T$. Ha
   viszont több mint $8 dot abs(w)^c$ lépésig fut, akkor elutasítunk.
 
-  Figyeljük meg, hogy a $w in.not L$, akkor nem tudunk tévedni, mivel vagy
+  Figyeljük meg, hogy ha $w in.not L$, akkor nem tudunk tévedni, mivel vagy
   leáll az adott idő alatt és elutasítunk, vagy nem áll le és akkor is
   elutasítunk.
 
-  Ha viszont $w in L$, akkor kétszer futtatjuk $T$-t az előző feltételekkel és csak akkor utasítjuk el $w$-t, ha mindkétszer elutasítanánk. Ekkor annak az esélye, hogy így is elutasítjuk, az
+  Ha viszont $w in L$, akkor bajban vagyunk, ezért kétszer futtatjuk $T$-t az
+  előző feltételekkel és csak akkor utasítjuk el $w$-t, ha mindkétszer
+  elutasítanánk. Annak a valószínűsége, hogy elfogadjuk $w$-t a fenti logika
+  szerint legfeljebb $1/2 - 1/8 = 3/8$, mert ha kevesebb mint $8 abs(w)^c$ ideig fut,
+  akkor $1/2$ eséllyel elfogadjuk, ha tovább fut akkor elutasítjuk, aminek az
+  esélye legfeljebb $1/8$.
+
+  Tehát annak az esélye, hogy egyszer futtatva elfogadjuk $1 - 3/8 = 5/8$. Ha kétszer futtatjuk, akkor 
   $
     (5/8)^2 < 1/2.
   $
-
 ]
 
 #remark[
@@ -163,7 +109,7 @@ in L$-re.
 
 #definition[$"P"\/f$][
   $"P"\/f$ azon nyelveket jelöli, melyekre létezik egy Turing-gép, ami
-  elfogadja a $w, a$ párt polinomiális időben, ahol $a$ egy legfeljebb $f(abs(w))$ méretű szó amit
+  elfogadja a $(w, a)$ párt polinomiális időben, ahol $a$ egy legfeljebb $f(abs(w))$ méretű szó amit
   megsúgunk és csak az input hosszától függ.
 ]
 
@@ -192,7 +138,9 @@ in L$-re.
   szavak vannak, ahol $x in L$. Tehát $K$ egy unáris nyelv ahol pontosan az $x$
   hosszú szavak vannak, ahol $x in L$.
 
-  Ez a nyelv nyilván nem rekurzív, mert $L$ sem az.
+  Ez a nyelv nyilván nem rekurzív, mert $L$ sem az. Viszont a hossza az
+  inputnak egyértelműen meghatározza $x$-et, így az egy bites súgás $x in^? L$
+  kérdésre a válasz.
 ]
 
 #definition[$"P"\/"poly"$][
@@ -232,7 +180,7 @@ in L$-re.
   Tehát egy $r in Sigma_0^p(n)$ véletlen bitsorozat meghatározza $T$ működését.
 
   Azt mondjuk, hogy $S$ _jó_ $L^(=n)$-re, ha $forall w in L^(=n)$-re $exists r
-  in S$ úgy, hogy $T$ lefogadja a $(w, r)$ párost. Szavakban annyit jelent,
+  in S$ úgy, hogy $T$ elfogadja a $(w, r)$ párost. Szavakban annyit jelent,
   hogy $S$ bitsorozatok halmaza, melyben van olyan bitsorozat amellyel $T$
   elfogadja $w$-t.
 

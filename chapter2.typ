@@ -550,3 +550,4 @@ Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 
 ]
 
+#pagebreak()

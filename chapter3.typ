@@ -26,7 +26,6 @@
   variant: "Állítás"
 )
 
-#pagebreak()
 = Interaktív bizonyítások
 #example[
   Interaktív protokoll gráf _nem_ izomorfizmusra.
@@ -42,7 +41,7 @@
   megmondja, hogy $G$ vagy $G'$ a mutatott gráf.
 
   Ha a két gráf izomorf, akkor Merlinnek sincs esélye kitalálni melyik gráfot
-  mutatja éppen Artúr, és így a legfeljebb tippelhet.
+  mutatja éppen Artúr, és így legfeljebb tippelhet.
 
   Tehát Artúr megkérdezi Merlint a fent leírt módon $100$-szor, hogy a jelenleg
   mutatott gráf melyik. Ha Merlin mindegyik alkalommal jól válaszolt akkor vagy
@@ -67,7 +66,7 @@
 
   Azt mondjuk, hogy a protokoll elfogadja az $L$ nyelvet, ha $w in L$ esetén
   van olyan Merlin, hogy Artúr legalább $1 - 1/2^abs(w)$ valószínűséggel
-  elfogadja $w$-t, és $w in.not L$ eseté minden Merlin esetén Artúr legfeljebb
+  elfogadja $w$-t, és $w in.not L$ esetén minden Merlin esetén Artúr legfeljebb
   $1/2^abs(w)$ valószínűséggel fogadja el $w$-t, azaz téved.
 ]
 
@@ -152,17 +151,31 @@ A bizonyítás előtt bevezjük a következő segítő fogalmat.
 
 #remark[
   Habár egy szinten exponenciálisan sok csúcs lehet, ezt a gráfot be tudjuk
-  járni polinomiális tárban.
+  járni polinomiális tárban, mert polinomiális mélységű.
 ]
 
 #proof[#ref(<ip-in-pspace>)][
-  Ha Artúr válaszol akkor vegyük a súlyozott átlagát a lehetséges válaszoknak
-  az elutasítási valószínűségét.
+  Képzeljük el az interaktív bizonyítást protokoll fáját. Tudjuk, hogy minden
+  levélben Artúr elfogad vagy elútasít, mert végetért a bizonyítás.
 
-  Ha viszont Merlin válaszol akkor a maximális elutasítási valószínűséget adjuk
-  meg.
+  Az a célunk, hogy kiszámoljuk, hogy a gyökérben mekkora valószínűséggel
+  fogadja el Artúr az adott bizonyítást a protokoll mentén. Ehhez az összes
+  csúcsra kiszámoljuk, hogy onnan mekkora valószínűséggel fogadja el Artúr a
+  bizonyítást.
 
-  #text(red)[*TODO:*] Jobban leírni a bizonyítást.
+  A levelekben tudjuk, hogy $0$ vagy $1$ a valószínűség, mert ott már vagy elfogadta vagy elutasította.
+
+  Merlinnek az a célja, hogy maximalizálja az elfogadási valószínűséget, míg
+  Artúr súlyozottan átlagolja valószínűségeket, mivel Artúr válaszai egy
+  érmedobás után szólnak.
+
+  Ezért, ha Artúr válaszol akkor vegyük a súlyozott átlagát a lehetséges
+  válaszoknak az efogadási valószínűségét, ha viszont Merlin válaszol akkor a
+  maximális elfogadási valószínűséget adjuk meg.
+
+  Bár egy csúcsnak lehet exponenciálisan sok gyereke, a protokoll fa mélysége
+  polinomiális. Ezért rekurzívan ki tudjuk számolni a gyökér elfogadási
+  valószínűségét a gyökerelktől kezdve polinomiálist tárban.
 ]
 
 #theorem[Shamir][
@@ -171,8 +184,10 @@ A bizonyítás előtt bevezjük a következő segítő fogalmat.
   $
 ] <shamir>
 
-A bizonyításhoz először bevezetünk pár segéd fogalmat és bizonyítunk valamit
-róluk. A tétel bizonyítása és segéd állítások az eredeti cikk alapján lettek feldolgozva, ami elérhető a következő linken: #link("https://dl.acm.org/doi/pdf/10.1145/146585.146609")
+A bizonyításhoz először bevezetünk pár segédfogalmat és bizonyítunk valamit
+róluk. A tétel bizonyítása és segéd állítások az eredeti cikk alapján lettek
+feldolgozva, ami elérhető a következő linken:
+#link("https://dl.acm.org/doi/pdf/10.1145/146585.146609")
 
 #definition[Egyszerű tqbf][
   Azt mondjuk, hogy a $phi$ teljesen kvantifikált Boole-formula _egyszerű_, ha minden $x_i$ változójára igaz, hogy $x_i$ kvantálásának helye és előfordulásának helye között legfeljebb egy darab univerzális kvantor ($forall$) van.
@@ -209,7 +224,7 @@ róluk. A tétel bizonyítása és segéd állítások az eredeti cikk alapján 
   Tehát $x_i$ kvantálása utáni első univerzális kvantor után létrehozunk egy új
   változót, $x_i^1$, mely értéke pont $x_i$.
 
-  Ezt a módosítást addig csináljuk amíg nem jutunk egyszerű formulához.
+  Ezeket a módosításokat addig csináljuk amíg egyszerű formulához nem jutunk .
 ]
 
 #definition[Formula aritmetizáltja][
@@ -217,8 +232,8 @@ róluk. A tétel bizonyítása és segéd állítások az eredeti cikk alapján 
   aritmetikai kifejezés, melyet úgy kapunk, hogy a formulában a következő
   előfordulásokat a megadott párjukra cseréljük le:
   $
-    "True" |-> 1, quad &"False" |-> 0, quad& x |-> x \
-    x or y |-> x + y quad &x and y |-> x dot y quad& overline(x) |-> (1 - x) \
+    &"True" |-> 1,     quad &"False" |-> 0,       quad &x |-> x \
+    &x or y |-> x + y, quad &x and y |-> x dot y, quad &overline(x) |-> (1 - x) \
   $
   A kvantorok viszont a következőképpen cseréljük le:
   $
@@ -297,7 +312,7 @@ mellett.
   $
     f = product_(x_1 in {0, 1}) [(1 - x_1) + sum_(x_2 in {0, 1}) product_(x_3 in {0, 1}) (x_1 dot x_2 + x_3)],
   $
-  melnyek értéke $2$. Ezen aritmetizált funkcionális formája a következő:
+  melynek értéke $2$. Ezen aritmetizált funkcionális formája a következő:
   $
     f(x_1) = [(1 - x_1) + sum_(x_2 in {0, 1}) product_(x_3 in {0, 1}) (x_1 dot x_2 + x_3)].
   $
@@ -335,7 +350,7 @@ melynek funkcionális formájában $2^(n-1)$-ed fokon fog szerepelni $(x_1 + c)$
 
   *Interaktív protokoll*
 
-  A protokll azt fogja bizonyítani, hogy $f equiv.not 0 (mod p)$, ahol $f$ már
+  A protokoll azt fogja bizonyítani, hogy $f equiv.not 0 (mod p)$, ahol $f$ már
   $phi$-nek az aritmetizáltja.
 
   1. Először Merlin elküldi $f (mod p)$ értékét Artúrnak és a funkcionális
@@ -347,12 +362,14 @@ melynek funkcionális formájában $2^(n-1)$-ed fokon fog szerepelni $(x_1 + c)$
 
     Miután Artúr ellenőrizte $f$-et és $f(x)$-et, véletlenül választ $xi in {0,
     1, ..., p-1}$ számot és behelyettesíti $xi$-t és megkapja az $f(xi)$
-    kifejezést. Merlinnek elküldi $f(xi)$-t.
+    kifejezést. Merlinnek elküldi $f(xi)$-t miután leszedte az első kvantort.
 
-  3. Erre Merlinnek ki kell számolnia $f(xi)$-t és meg kell adnia egyszerű
-     polinom alakra hozva a funkcionális formáját.
+  3. Erre Merlinnek meg kell adnia egyszerű polinom alakra hozva a funkcionális formáját.
 
-  4. A protokoll így folytatódik tovább míg ki nem ürül a kifejezés.
+  4. Artúr ellenőrzi, hogy visszakapja-e $f(xi)$-t a $0-1$ behelyettsítéssel és
+     összeggel/szorzattal, a letörölt kvantortól függően.
+
+  5. A protokoll így folytatódik tovább míg ki nem ürül a kifejezés.
 
 
   Ha Merlin becsületesen játszik, akkor Artúr mindig elfogad. 
@@ -374,3 +391,68 @@ melynek funkcionális formájában $2^(n-1)$-ed fokon fog szerepelni $(x_1 + c)$
   Merlin $1/2^n$.
 ]
 
+
+== Zero Knowledge Proofs
+#definition[Zero Knowledge Proof][
+  Egy zero knowledge proof (ZK) két szereplő interakcója: Merlin (a bizonyító)
+  és Artúr (az ellenörző).
+
+  Egy ZK-nak a következő három tulajdonságot kell teljesítenie:
+  + Ha a bizonyítandó állítás igaz, akkor egy őszinte Artúrt meg tudja győzni
+    egy őszinte Merlin.
+
+  + Ha az állítás hamis, akkor még csalással sem tudja Merlin meggyőzni Artúrt,
+    legfeljebb egy kis valószínűséggel téved Artúr.
+
+  + Ha az állítás igaz, akkor Artúr nem tud meg semmi extra információt azon
+    kívül hogy igaz az állítás Merlin bizonyításából.
+]
+
+#remark[
+  Az első két feltétel tehát csak annyit jelent, hogy ez egy interaktív
+  bizonyítás. A lényeg pont az hogy Artúr nem tud meg semmi mást azon kívül
+  hogy igaz az állítás.
+]
+
+#example[Gráf nem izomorfizmus][
+  Adott két gráf $G_1, G_2$ és el szeretnénk dönteni, hogy $G_1 tilde.eq.not G_2$.
+
+  Artúr újra címezi a csúcsokat és megmutatja az egyik gráfot. Erre Merlinnek
+  meg kell mondania, hogy $G_1$-et vagy $G_2$-t mutatta fel Artúr.
+]
+
+#example[Hamilton kör létezése][
+  Adott egy $G$ gráf, mely ismert Merlin és Artúr számára is. Merlinnek be kell
+  bizonyítania, hogy ő ismer egy Hamilton-kört $G$-ben.
+
+  + Merlin újra címezi $G$ csúcsait egy permutációval, ezzel létrehoz egy $H$
+    gráfot, mely persze izomorf $G$-vel.
+  + Fölírja $H$ éleit egy-egy lapra és fejjel lefelé elhelyezi őket az asztalra
+    és mostmár nem nyúlhat hozzájük addig amíg Artúr meg nem engedi.
+  + Most Artúr a következő kettő eset közül választ: \
+    - Merlin, bizonyítsd be, hogy $H$ valóban izomorf $G$-vel.
+    - Merlin mutasd meg a Hamilton-körödet $H$-ban.
+
+  +
+    - Ha azt kell bizonyítania Merlinnek, hogy $G tilde.eq H$, akkor felfordítja
+       az összes lapot és elmondja a permutációt amivel újra cimkézte a
+       csúcsokat. Ezzel Artúr meg tud győződni, hogy valóban izomorf a két gráf.
+
+    - Ha viszont $H$-ban kell mutatnia Merlinnek egy Hamilton-kört, akkor felfedi csak azokat az éleket amik Hamilton-kört alkotnak.
+]
+
+#proof[
+  Az előző bizonyítás valóban egy zero knowledge proof, mivel ha Merlin ismert
+  egy Hamilton-kört $G$-ben, akkor erről meggyőződött Artúr. Ha Merlin nem
+  ismert egy Hamilton-kört $G$-ben, akkor még Artúr kérdése előtt el kellett
+  döntenie, hogy vagy egy valid izomorf gráfot kreál vagy egy valid Hamilton
+  kört, ami nem izomorf $G$-vel. Mivel Merlin nem tudja előre Artúr kérdését
+  ezért mindig $1 \/ 2$ eséllyel lebukik.
+
+  Másrészről, Artúr nem tudott meg semmi többet a Hamilton körről mint, hogy
+  létezik, mivel akkor is amikor Merlin mutat neki egy Hamilton-kört akkor is
+  csak $H$-ban mutat fel $n$ élet ami $n$ csúcsot tartalmaz, de azt még a
+  halandó Artúr is tudja, hogy egy Hamilton kör $n$ élből és $n$ csúcsból áll.
+]
+
+#pagebreak()

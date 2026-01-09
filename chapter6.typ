@@ -117,7 +117,7 @@
 ]
 
 #proof[
-  $a_i b_i$ szorzatok $O(1)$. Összeadások mint egy teljes bináris fa -> $log n$
+  $a_i b_i$ szorzatok $O(1)$. Összeadások mint egy teljes bináris fa $=> log n$
 ]
 
 #example[
