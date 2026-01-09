@@ -56,17 +56,17 @@
 #definition[Interaktív protokoll][
   Azt szeretnénk eldönteni, hogy egy adott $w$ szóra és $L$ nyelvre $w in^? L$.
 
-  A bizonyítást Merlin és Artúr együtt foglyák végezni. Merlin bizonyít, míg
+  A bizonyítást Merlin és Artúr együtt fogják végezni. Merlin bizonyít, míg
   Artúr ellenőrzi Merlin bizonyításait. Artúr egy randomizált Turing-gép, míg
   Merlin bármit ki tud számolni az input alapján egy lépés alatt.
 
-  Először merlin szól és mond egy polinomiális hosszú üzenetet. Erre Artúr
+  Először Merlin szól és mond egy polinomiális hosszú üzenetet. Erre Artúr
   Merlin üzenete és $w$ függvényében polinomiálisan sok véletlen számot
   felhasználva válaszol. Ezt az interakciót megismételi a két fél amíg Artúr el
   nem szánja magát és vagy elfogadja a $w$ szót vagy elutasítja.
 
   Azt mondjuk, hogy a protokoll elfogadja az $L$ nyelvet, ha $w in L$ esetén
-  van olyan Merlin, hogy Artúr legalább $1  1/2^abs(w)$ valószínűséggel
+  van olyan Merlin, hogy Artúr legalább $1 - 1/2^abs(w)$ valószínűséggel
   elfogadja $w$-t, és $w in.not L$ eseté minden Merlin esetén Artúr legfeljebb
   $1/2^abs(w)$ valószínűséggel fogadja el $w$-t, azaz téved.
 ]
