@@ -319,7 +319,7 @@ in L$-re.
 ]
 
 #proof[
-  Mondjuk, hogy $abs(A) <= n^c$, ekkor ugyanazt az érvelést követve, mint a
+  Mondjuk, hogy $abs(A^(=n)) <= n^c$, ekkor ugyanazt az érvelést követve, mint a
   @berman-thm bizonyításában, ha nem találtunk kielégítő értékadást a fában
   DFS-el, akkor legfeljebb $n dot n^c$ lépést tettünk. Ha viszont találtunk
   kielégítő értékadást, akkor még gyorsabban megtaláltuk mint az előző esetben.
@@ -354,10 +354,13 @@ in L$-re.
 ]<lemma-sparse-prop-np-over-clogn>
 
 #proof[
-  Legyen a $w$ inputra a $abs(w)$ hosszú szavak száma $A$-ban, azaz $l =
-  abs(A^(=abs(w)))$. A $T$ nem determinisztikus Turing-gép (nem
-  determinisztikusan) legenerálja az összes $abs(w)$ hosszú szót és mindegyikre
-  leelenörzi, hogy eleme-e $A$-nak, így megkapjuk $A^(=abs(w))$-t.
+  Legyen a $w$ inputra a $abs(w)$ hosszú szavak száma $A$-ban a súgás, azaz $l
+  = abs(A^(=abs(w)))$ és ezt az $l$-et súgjuk, ami $c dot log n$ méretű, mert
+  $A$ ritka.
+
+  A $T$ nem determinisztikus Turing-gép (nem determinisztikusan)
+  legenerálja az összes $abs(w)$ hosszú szót és mindegyikre leelenörzi, hogy
+  eleme-e $A$-nak, így megkapjuk $A^(=abs(w))$-t.
 
   Ezután végigmegy $A^(=abs(w))$ összes $w_i$ elemén és leelenőrzi, hogy $w_i
   =^? w$. Ha van olyan $i$, melyre $w_i = w$, akkor $w in A => w in.not
@@ -454,7 +457,7 @@ in L$-re.
   Nem bizonyítjuk.
 ]
 
-#theorem[
+#theorem[Sipser-Gács][
   $
     #BPP in Sigma_2 inter Pi_2
   $
