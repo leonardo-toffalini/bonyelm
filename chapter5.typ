@@ -98,7 +98,7 @@
 ]
 
 #remark[
-  Minden $f: {0, 1}^n -> {0, 1}$ függvényt ki lehet számolni $3$ mély,
+  Minden $f: {0, 1}^n -> {0, 1}$ Boole függvényt ki lehet számolni $3$ mély,
   exponenciális méretű, Boole-hálózattal, ami csak a $and, or , not$
   függvényeket alkalmazza a belső csúcsokon.
 ]
@@ -107,7 +107,7 @@
   Ismert, hogy minden Boole-függvény felírható konjunktív normál forma alakba.
   Tehát, a Boole-hálózat legalsó szintjén az inputokat csoportosítjuk klózokba
   $or$ jelekkel, ahol kell beillesztünk egy $not$ jelet, ha $not x_i$ szerepel
-  a klózban. Az alkozott klózokat meg behúzzuk az egyetlen output csúcsba,
+  a klózban. Az alkotott klózokat meg behúzzuk az egyetlen output csúcsba,
   amiben egy $and$ jel szerepel, tehát _össze vagyoljuk a klózokat_.
 ]
 

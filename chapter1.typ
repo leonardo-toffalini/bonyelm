@@ -205,7 +205,7 @@ Ennek a bizonyításához kell a következő definíció és tétel.
 #theorem[Az ND kommunikációs bonyolultság jellemzése fedő téglalapokkal][
   $kappa_1(f)$ az a legkisebb $t$ szám, hogy $M_f$ egyesei lefedhetők $2^t$
   darab csupa 1-es részmátrixxal
-]
+]<NDKB-jell>
 
 #remark[
   $M_f$-et már ismerjük, a kommunikációs mátrix. A tételben részmátrix alatt
@@ -394,10 +394,10 @@ Egy kommunikáció $4 log n$ bitet küld, ergo összesen $400 log n$ bitnyi komm
 #proof[Aho--Ullman--Yanakakis][
   Világos, hogy $rho(M_f) <= r(M_f)$, és $log rho(M_f) <= kappa_1(f)$
   teljesülnek, mert egy csupa 1 főátlójú felsőháromszög mátrix teljes rangú,
-  illetve \ref{NDKB jell} miatt.
+  illetve @NDKB-jell miatt.
 
   Indukcióval belátjuk, hogy $kappa(f) <= (2 + log rho(M_f))(2 + kappa_0 (f))$.
-  Ha $rho(M_f) = 1$, akkor nem is kell kommunikálni, mert egy ilen mátrixban
+  Ha $rho(M_f) = 1$, akkor nem is kell kommunikálni, mert egy ilyen mátrixban
   vagy csak egyesek állnak, vagy pontosan egy sorában vagy oszlopában vannak
   egyesek.
   Az általános lépésben tekintsük a kommunikációs mátrix nullásainak a fedését
@@ -431,3 +431,5 @@ Láttuk továbbá, hogy $"NP"^("CC") != "co-NP"^("CC")$, mert $"ID"$ benne van a
 jobb oldalban, de a balban nincs.
 
 $"P"^"CC" != "co-NP"^"CC"$ szintén az $"ID"$ miatt (így $"P"^"CC" != "NP"^"CC"$ is teljesül).
+
+#pagebreak()

@@ -1,5 +1,8 @@
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
+#import "@preview/cetz:0.4.2": canvas, draw, tree
+#import "common.typ": *
+
 #show: thmbox-init()
 
 #let definition = definition.with(
@@ -28,11 +31,11 @@
 
 = Véletlen bonyolultság osztályok
 
-Volt, hogy $L in "NP"$ pontosan akkor, ha létezik polinomiális tanu minden $w
+Volt, hogy $L in #NP$ pontosan akkor, ha létezik polinomiális tanu minden $w
 in L$-re.
 
 #definition[RP][
-  $L in "RP" <==> exists T$ Turing gép amely $w in L$ esetén legalább $1\/2$
+  $L in #RP <==> exists T$ Turing gép amely $w in L$ esetén legalább $1\/2$
   eséllyel elfogad és $w in.not L$ esetén $1$ valószínűséggel elutasít.
 
   Ezt mind várhatóan polinomiális időben.
@@ -64,7 +67,7 @@ in L$-re.
 ]
 
 #remark[
-  Ha $L in "RP"$, akkor feltehető, hogy polinomiális ideig működik az őt
+  Ha $L in #RP$, akkor feltehető, hogy polinomiális ideig működik az őt
   elfogadó Turing-gép.
 ]<proof-expected-poly-to-poly>
 
@@ -99,16 +102,16 @@ in L$-re.
 ]
 
 #remark[
-  Az a sejtés, hogy $"RP" = "P"$. Ezt még nem sikerült bizonyítani, de nem
+  Az a sejtés, hogy $#RP = #P$. Ezt még nem sikerült bizonyítani, de nem
   sokan lepődnének meg ha valóban így lenne.
 ]
 
 #remark[
-  Érthetően $"P" subset.eq "RP" subset.eq "NP"$.
+  Érthetően $#P subset.eq #RP subset.eq #NP$.
 ]
 
-#definition[$"P"\/f$][
-  $"P"\/f$ azon nyelveket jelöli, melyekre létezik egy Turing-gép, ami
+#definition[$#P\/f$][
+  $#P\/f$ azon nyelveket jelöli, melyekre létezik egy Turing-gép, ami
   elfogadja a $(w, a)$ párt polinomiális időben, ahol $a$ egy legfeljebb $f(abs(w))$ méretű szó amit
   megsúgunk és csak az input hosszától függ.
 ]
@@ -118,10 +121,10 @@ in L$-re.
 ]
 
 #remark[
-  $"P"\/ 1 =^? "P"$, ahol $"P"\/1$ azt jelenti, hogy mindegyik input hosszhoz
+  $#P\/ 1 =^? #P$, ahol $#P\/1$ azt jelenti, hogy mindegyik input hosszhoz
   kizárólag egy betűt/bitet súghatunk.
 
-  A válasz negatív, sőt $"P"\/1$-ben nem is mindegyik nyelv rekurzív, nem hogy
+  A válasz negatív, sőt $#P\/1$-ben nem is mindegyik nyelv rekurzív, nem hogy
   polinomiális időben felismerhető nyelvek.
 
   A bizonyításhoz tekintsünk egy tetszőleges nem rekurzív nyelvet a ${0, 1}$
@@ -143,15 +146,15 @@ in L$-re.
   kérdésre a válasz.
 ]
 
-#definition[$"P"\/"poly"$][
+#definition[$#P\/"poly"$][
   $
-    "P"\/"poly" = union.big_(k=1)^infinity "P"\/n^k
+    #P\/"poly" = union.big_(k=1)^infinity #P\/n^k
   $
 ]
 
-#definition[$"P"\/log$][
+#definition[$#P\/log$][
   $
-    "P"\/log = union.big_(k=1)^infinity "P"\/k dot log n
+    #P\/log = union.big_(k=1)^infinity #P\/k dot log n
   $
 ]
 
@@ -164,17 +167,17 @@ in L$-re.
 
 #theorem[Adleman][
   $
-    "RP" subset.eq "P" \/ "poly"
+    #RP subset.eq #P \/ "poly"
   $
 ]
 
 #proof[
-  Legyen $L in "RP"$, azt kell belátnunk, hogy $L in "P" \/ "poly"$. Legyen
+  Legyen $L in #RP$, azt kell belátnunk, hogy $L in #P \/ "poly"$. Legyen
   továbbá $n = abs(w)$ és tegyük fel, hogy $Sigma_0 = {0, 1}$.
 
-  Ugye azt kell belátnunk, hogy van polinomiális hoszzú súgás, amivel már el
+  Ugye azt kell belátnunk, hogy van polinomiális hosszú súgás, amivel már el
   tudja dönteni egy Turing-gép egy szó tagságát, legyen ez a polinom $p$.
-  Így feltehetjük, hogy $L$-et ($"RP"$ értelemben) felismerő $T$ Turing-gép egy
+  Így feltehetjük, hogy $L$-et ($#RP$ értelemben) felismerő $T$ Turing-gép egy
   $p(n)$ hosszú véletlen bitsorozatot használ.
 
   Tehát egy $r in Sigma_0^p(n)$ véletlen bitsorozat meghatározza $T$ működését.
@@ -217,7 +220,7 @@ in L$-re.
 ]
 
 #theorem[Mahaney][
-  Ha $L$ ritka és $"NP"$-teljes, akkor $"P" = "NP"$.
+  Ha létezik egy ritka $L$ nyelv ami $#NP$-teljes, akkor $#P = #NP$.
 ]
 
 #definition[Unáris nyelv][
@@ -225,20 +228,92 @@ in L$-re.
 ]
 
 #theorem[Berman][
-  Ha $L$ unáris és $"NP"$-teljes, akkor $"P" = "NP"$.
+  Ha létezik egy unáris $L$ nyelv ami $#NP$-teljes, akkor $#P = #NP$.
 ]<berman-thm>
 
 #proof[
   #text(red)[*TODO*]
+
+  Mivel $L in #NPC$ ezért a $"SAT"$ nyelv visszavezethető $L$-re.
+
+  Legyen $phi$ egy CNF, mivel $#SAT prop L$, ezért $exists f: phi mapsto
+  f(phi)$ leképezés.
+
+  Játszuk azt a játékot, hogy minden lépésben az egyik változóját a $phi$
+  CNF-nek lefixáljuk, például az első lépésben lefixáljuk az első változóját
+  $phi$-nek úgy, hogy $phi_(x_1 = 1) = phi_1$ avagy $phi_(x_1 = 0) = phi_0$.
+  Hasonlóképpen a következő szinteken a következő változókat fixáljuk.
+
+  Ezzel a játékkal a következő fát alkotjuk. Itt minden levélben már csak egy
+  $0$ vagy $1$ érték szerepel. Ennek a fának a mélysége $n$ ha $n$ változós a
+  $phi$ CNF.
+
+  Figyelem, hogy lehet egy közbülső csúcsnak is már fix az értéke, például ha
+  már lefixáltunk egy-egy változót mindegyik klózban igazra.
+
+  #align(center)[
+  #canvas({
+      import draw: *
+      let encircle(i) = {
+        std.box(baseline: 2pt, std.circle(stroke: .5pt, radius: .6em)[
+          #move(dx: -0.36em, dy: -1.1em, $#i$)
+        ])
+      }
+
+      set-style(content: (padding: 0.2em))
+      tree.tree(
+        ([$phi$], 
+          ([$phi_0$], 
+            ([$phi_(00)$], $phi_(000)$, $phi_(001)$),
+            ([$phi_(01)$], $phi_(010)$, $phi_(011)$)
+          ),
+          ([$phi_1$], 
+            ([$phi_(10)$], $phi_(100)$, $phi_(101)$),
+            ([$phi_(11)$], $phi_(110)$, $phi_(111)$)
+          ),
+        ))
+    })
+  ]
+
+  Érthetően $phi in #SAT$, ha van igaz értékadása, azaz a fenti fában van olyan
+  levél melynek értéke $1$.
+
+  Azt mondom, hogy egy csúcs kielégíthető a CNF fában, ha van $1$-es csúcs az
+  alatta lévő részfában.
 ]
 
 #lemma[
-  DFS a CNF fában, akkor megállásig vegy $n$ darab kielégíthető csúcson mentem át vagy nullán... #text(red)[*TODO*]
+  Ha mélységi bejárást (DFS) végzek a CNF fában, azaz addig megyek ameddig nem találok $1$-es vagy bejárom az egész fát, akkor megállásig vagy $<=n$ darab kielégíthető csúcson mentem át vagy egyen sem.
 ]
-#proof[kinda trivi.]
+
+#proof[
+  Ha bejártam az egész fát akkor nem találtam egy $1$-es csúcsot sem, tehát
+  egyik csúcs sem kielégíthető az egész fában tehát nem járhattam be egyet sem.
+
+  Ha viszont találtam egy $1$-es csúcsot akkor az $1$-es csúcs szülein
+  végigmentem, ezek mind kielégíthetők. Mivel DFS-t végzek ezért nem is mentem
+  át másik kielégíthető csúcson, mert akkor lementem volna egészen addig a
+  csúcsig alatta ami $1$-es.
+]
+
+#proof[Berman folytatása][
+  Minden $phi$ CNF-hez hozzárendelek egy $f(phi)$ színt. A szíeneim két
+  csoportba fognak tartozni: $f(phi) in L$ vagy $f(phi) in.not L$.
+
+  Miközben járom be a CNF-fát DFS-el, számolom a $f(phi)$ színeket. Ha egy
+  színt már $(n+1)$-szer láttam, akkor az előző lemmából tudom, hogy ott már
+  nem lehet $1$-es csúcs alatta, ezért nem megyek tovább.
+
+  Mivel polinomiálisan sok szín van, mert a visszavezetés polinomiális, és
+  mindegyik színt legfeljebb $n$-szer látogatok meg, ezért legfeljebb $n dot
+  "poly"(n)$ csúcson mentem át.
+
+  Ennyi cúscs látogatása után már meg agyok győződve, hogy $phi in #SAT$ vagy
+  sem. Tehát adtam egy polinomiális algoritmust $#SAT$-ra, tehát $#P = #NP$.
+]
 
 #theorem[Fortune][
-  Ha $A$ egy ritka nyelv és $overline("SAT") prop A$, akkor $"P" = "NP"$. \
+  Ha létezik egy ritka $A$ nyelv és $overline("SAT") prop A$, akkor $#P = #NP$. \
   Itt a $overline("SAT")$ azt a nyelvet jelöli amiben azon konjunktív normál
   formák vannak, melyeket nem lehet kielégíteni.
 ]
@@ -259,7 +334,7 @@ in L$-re.
 ]
 
 #corollary[
-  Ha $A$ ritka és $overline("SAT") prop_(P\/c log n) A$, akkor $"P" = "NP"$.
+  Ha létezik egy ritka $A$ nyelv és $overline("SAT") prop_(P\/c log n) A$, akkor $#P = #NP$.
 ]<corr-sat-comp-sugas>
 
 #proof[
@@ -269,13 +344,13 @@ in L$-re.
 ]
 
 #definition[
-  $"NP"\/f(n)$ azon $L$ nyelvek osztályát jelöli, melyekre van egy olyan $T$
+  $#NP\/f(n)$ azon $L$ nyelvek osztályát jelöli, melyekre van egy olyan $T$
   nem determinisztikus Turing-gép, mely $w in L$-et egy $f(abs(w))$ méretű
   súgással elfogadja.
 ]
 
 #lemma[
-  Ha $A$ ritka és $A in "NP"$, akkor $overline(A) in "NP"\/c log n$.
+  Ha létezik egy ritka $A$ nyelv és $A in #NP$, akkor $overline(A) in #NP\/c log n$.
 ]<lemma-sparse-prop-np-over-clogn>
 
 #proof[
@@ -291,15 +366,15 @@ in L$-re.
 ]
 
 #proof[Mahaney][
-  Ha $A in "NPC"$ és $A$ ritka, akkor $"SAT" prop A$ és $overline("SAT") prop
+  Ha $A in #NPC$ és $A$ ritka, akkor $"SAT" prop A$ és $overline("SAT") prop
   overline(A)$, sőt ez a két visszavezetés ugyanazzal az $f$-el megy.
 
-  A @lemma-sparse-prop-np-over-clogn miatt, ha $A$ ritka és $A in "NP"$, akkor
-  $overline(A) in "NP"\/ c log n$. Tehát $overline("SAT") prop overline(A) in
-  "NP"\/ c log n$, ami miatt $overline("SAT") in "NP"\/c log n$.
+  A @lemma-sparse-prop-np-over-clogn miatt, ha $A$ ritka és $A in #NP$, akkor
+  $overline(A) in #NP\/ c log n$. Tehát $overline("SAT") prop overline(A) in
+  #NP\/ c log n$, ami miatt $overline("SAT") in #NP\/c log n$.
 
-  Mivel $A in "NPC"$, ezért $overline("SAT") prop_(P\/c log n) A$ és így a
-  @corr-sat-comp-sugas miatt $"P" = "NP"$.
+  Mivel $A in #NPC$, ezért $overline("SAT") prop_(P\/c log n) A$ és így a
+  @corr-sat-comp-sugas miatt $#P = #NP$.
 ]
 
 #definition[BPP][
@@ -342,23 +417,23 @@ in L$-re.
 ]
 
 #remark[
-  A sejtés az, hogy $"P" = "BPP"$.
+  A sejtés az, hogy $#P = #BPP$.
 ]
 
 #remark[
-  Nyilván $"P" subset.eq "RP" subset.eq "BPP"$.
+  Nyilván $#P subset.eq #RP subset.eq #BPP$.
 ]
 
 #definition[ZPP][
   $
-    "ZPP" = "RP" inter "co-RP"
+    "ZPP" = #RP inter #coRP
   $
 ]
 
 #remark[
   A fenti definíció ekvivalens azzal, hogy olyan $L$ nyelvek vannak
   $"ZPP"$-ben, melyekre van olyan $T$ probabilisztikus Turing-gép, mely hiba
-  nélül felismeri $L$-et. És ezt mind várhatóan polinomiális időben teszi meg.
+  nélkül felismeri $L$-et. És ezt mind várhatóan polinomiális időben teszi meg.
 
   Az osztály a nevét a _Zero (error) Probabilistic Polynomial_ kifejezésből
   kapja.
@@ -366,13 +441,13 @@ in L$-re.
 
 #remark[
   A tanult Schwartz-Zippel lemma érvén azt kapjuk, hogy a polinom különbség
-  feladat $"co-RP"$-beli. Azaz, azon $L$ nyelv, melyben $(p, q)$ polinom
+  feladat $#coRP$-beli. Azaz, azon $L$ nyelv, melyben $(p, q)$ polinom
   párosok vannak, ahol $p equiv.not q$.
 ]
 
 #proposition[
-  Ha a $T$ probabilisztikus Turing-gép azonosan egyenletes eloszlás független
-  bitekez használ, akkor ekvivalens definíciókat kapunk az előzőkkel.
+  Ha a $T$ probabilisztikus Turing-gép azonosan egyenletes eloszlású független
+  biteket használ, akkor ekvivalens definíciókat kapunk az előzőkkel.
 ]
 
 #proof[
@@ -381,7 +456,7 @@ in L$-re.
 
 #theorem[
   $
-    "BPP" in Sigma_2 inter Pi_2
+    #BPP in Sigma_2 inter Pi_2
   $
 ]
 

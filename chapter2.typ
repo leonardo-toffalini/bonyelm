@@ -1,5 +1,6 @@
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
+#import "@preview/cetz:0.4.0": canvas, draw
 #show: thmbox-init()
 
 #let definition = definition.with(
@@ -26,7 +27,6 @@
   variant: "Állítás"
 )
 
-#pagebreak()
 = NP-n túl
 == Polinomialis hierarchia
 
@@ -78,7 +78,6 @@
 
 Ezen osztalyokat a kovetkezo hierarchiaval tudjuk vizualisan jellemezni.
 
-#import "@preview/cetz:0.3.0": canvas, draw
 
 #figure(
   canvas({
