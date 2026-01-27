@@ -102,7 +102,7 @@ Ennek a bizonyításához kell a következő definíció és tétel.
 
 #theorem[Mehlhorn--Schmidt][
     $kappa(f) >= log r(M_f)$, ahol $r(M_f)$ az $M_f$ mátrix rangját jelöli.
-]
+]<thm-mehlhorn-schmidt>
 
 #proof[
   Legyen $P$ egy adott protokoll. Tegyük fel, hogy A kezd. Ekkor A kommunikál
