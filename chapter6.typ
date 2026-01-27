@@ -34,7 +34,7 @@
 = Párhuzamos algoritmusok
 
 #example[
-  Feladat: *input:* $a_1, dots, a_n in NN$, *output:* $max a_i$
+  _Feladat:_ *input:* $a_1, dots, a_n in NN$, *output:* $max a_i$
 
   $n^2$ processzorral meg tudunk adni egy $O(1)$ algoritmust.
 
@@ -48,7 +48,7 @@
 ]
 
 #example[
-  Feladat: *input:* $a_1, dots, a_n in NN$, *output:* $max a_i$
+  _Feladat:_ *input:* $a_1, dots, a_n in NN$, *output:* $max a_i$
 
   $n$ processzorral meg tudunk adni egy $O(log log n)$ algoritmust.
 
@@ -57,12 +57,14 @@
   maximum maximumját kell kiszámolnunk, amit $n$ processzorral tudunk $O(1)$
   időben.
 
-  Legyen $t(n)$, hogy mennyi idő $n$ elem maximumát kiszámolni $n$
-  processzorral. Most láttuk, hogy $t(n) = t(sqrt(n)) + 1$. Ezt a rekurziót
-  kifejtve azt kapjuk, hogy $t(n) = t(n^(1/(2^i))) + i$.
+  Legyen $T(n)$, hogy mennyi idő $n$ elem maximumát kiszámolni $n$
+  processzorral. Most láttuk, hogy $T(n) = T(sqrt(n)) + 1$.
+  
+  Tegyük fel, hogy $n = 2^k$. Ekkor $T(n) = T(2^k) = T(2^(k/2))$. Legyen $S(k)
+  = T(2^k)$. Ekkor $S(k) = S(k/2) + 1$, innen már egyből látszik, hogy $S(k) =
+  O(log k)$.
 
-  Ha $i = log log n$, akkor $n^(1/(2^i)) = 1$. Tehát $t(n) = O(log log n)$.
-
+  Mivel $k = log n$ és $T(n) = S(k)$ ezért $T(n) = O(log log n)$.
 ]
 
 #definition[PRAM][
@@ -107,7 +109,8 @@
 ]
 
 #definition[NC][
-  Ha egy $L$ feladatot $n^(O(1))$ processzorral $log^(O(1)) n$ időben ki tudok számolni, akkor az $L$ feladat $"NC"$-ben van (Nick's Class).
+  Ha egy $L$ feladatot $n^(O(1))$ processzorral $log^(O(1)) n$ időben ki tudok
+  számolni, akkor az $L$ feladat $"NC"$-ben van (_Nick's Class_).
 ]
 
 #example[
@@ -121,8 +124,82 @@
 ]
 
 #example[
-  Mátrix-mátrix szorzás
+  Mátrix-mátrix szorzás $n k m$ processzorral $O(log m)$ időben.
 
   $A in NN^(n times m)$, $B in NN^(m times k)$, kell $A B = C in NN^(n times k)$.
 ]
 
+#proof[
+  A mátrix-mátrix szorzás pontosan $n k$ darab skaláris szorzás, ahol $C_(i
+  j)$-t pontosan úgy kapom, hogy $A$-nak az $i$-edik sorát és $B$-nek a
+  $j$-edik oszlopát skalárisan szorzom.
+
+  Mivel mindegyik cellájára a $C$ eredmény mátrixnak tudok szolgáltatni $m$
+  darab processzort és egy cella értékét két $m$ hosszú vektor skaláris
+  szorzata határozza meg, ezért $O(log m)$ időben készen vagyok.
+]
+
+#example[
+  Positív élsúlyokkal rendelkző $G$ gráfban minden kezdő csúcsra és minden
+  végső csúcsra a legrövidebb út keresése $n^3$ processzoral $O(log n log log
+  n)$ időben. (_All Pairs Shortest Paths_)
+]
+
+#proof[
+  Definiáljuk a következő műveletet két mátrix között $A plus.circle B$, ahol
+  $
+    (A plus.circle B)_(i, j) := min_(k = 1, dots n) {a_(i k) + b_(k j)}.
+  $
+
+  Nyilvánvaló, hogy egy ilyen műveletet ki tudunk számolni $O(log log n)$
+  időben, ha van $n^3$ processzorunk, mert minden eredmény cellára adunk $n$
+  processzort és ott már $n$ elem minimumát $n$ processzorral $O(log log n)$
+  időben el tudjuk végezni.
+
+  Vegyük észre, hogy $A^(n) := overbrace(A plus.circle A plus.circle dots
+    plus.circle A, n)$ pont azt adja meg, hogy milyen hosszú két csúcs között a
+  legrövidebb út. Ezt már láttuk algoritmuselméleten a Floyd--Warshal algoritmusnál.
+
+  Figyeljük meg, hogy $A^(n)$-et ki tudjuk számolni $O(log n)$ művelettel úgy
+  hogy kiszámoljuk a kettő hatványokat sorrendben: $A^(1), A^(2), A^(4), A^(8),
+  dots, A^(n)$.
+
+  Tehát összesen $O(log n)$ darab műveletet kell elvégeznünk, melyek mind
+  $O(log log n)$ időben mennek, tehát $O(log n log log n)$ a végső idő.
+]
+
+Emlékezzünk vissza, hogy $2$ mély és exponenciális méretű Boole hálózattal ki
+tudunk számolni bármilyen Boole függvényt. Ennek a következménye, hogy
+exponenciálisan sok processzorral minden Boole függvényt ki tudunk számolni
+$O(1)$ időben.
+
+#text(red)[*Csánky tétele TODO*]
+
+#text(red)[*Teljes párosítás páros gráfban TODO*]
+
+#proposition[
+  Adott $n$ számot tudunk rendezni $n$ processzorral $O(log^2 n)$ időben.
+]
+
+#proof[
+  Az összefésülő rendezést fogjuk párhuzamosan megcsinálni. Tehát $m$ elemet
+  úgy rendezek, hogy az első felét és a második felét külön-külön rendezem és utána összefésülöm.
+
+  Hogyan fésülök össze két $m$ hosszú rendezet sorozatot $O(log m)$ időben $O(m)$ processzorral?
+
+  Állítsunk egy-egy processzort minden elemre a két $m$ hosszú sorozatból.
+  Mindegyik processzor megkeresi, hogy a hozzá rendelt elem hol lenne a másik
+  tömbben bináris kereséssel. Ha az egyik sorozatban az $i$-edik elem a másik
+  sorozatban a $j$-edik elem lenne, akkor az összefésült sorozatban az $(i + j
+  - 1)$-edik lesz. Tehát be is szúrjuk a megfelelő helyére az elemet.
+
+  Tehát minden elemet be tudok szúrni egyszerre $O(log m)$ időben az összefésült sorozatba.
+
+  Továbbá az összefésülő rendezés mindig felez és így $O(log n)$ szintje lesz,
+  és minden szinten összesen $n$ elemet kell összefésülni, tehát az
+  összefésülések költsége $O(log n)$ minden szinten. Tehát eredményként
+  $O(log^2 n)$ lépés alatt tudtunk rendezni egy sorozatot $n$ processzorral.
+
+]
+
+#pagebreak()

@@ -148,7 +148,7 @@ in L$-re.
 
 #definition[$#P\/"poly"$][
   $
-    #P\/"poly" = union.big_(k=1)^infinity #P\/n^k
+    #Ppoly = union.big_(k=1)^infinity #P\/n^k
   $
 ]
 
@@ -167,12 +167,12 @@ in L$-re.
 
 #theorem[Adleman][
   $
-    #RP subset.eq #P \/ "poly"
+    #RP subset.eq #Ppoly
   $
 ]
 
 #proof[
-  Legyen $L in #RP$, azt kell belátnunk, hogy $L in #P \/ "poly"$. Legyen
+  Legyen $L in #RP$, azt kell belátnunk, hogy $L in #Ppoly$. Legyen
   továbbá $n = abs(w)$ és tegyük fel, hogy $Sigma_0 = {0, 1}$.
 
   Ugye azt kell belátnunk, hogy van polinomiális hosszú súgás, amivel már el
@@ -232,8 +232,6 @@ in L$-re.
 ]<berman-thm>
 
 #proof[
-  #text(red)[*TODO*]
-
   Mivel $L in #NPC$ ezért a $"SAT"$ nyelv visszavezethető $L$-re.
 
   Legyen $phi$ egy CNF, mivel $#SAT prop L$, ezért $exists f: phi mapsto
@@ -319,7 +317,7 @@ in L$-re.
 ]
 
 #proof[
-  Mondjuk, hogy $abs(A^(=n)) <= n^c$, ekkor ugyanazt az érvelést követve, mint a
+  Mivel $A$ ritka, ezért $abs(A^(=n)) <= n^c$, ekkor ugyanazt az érvelést követve, mint a
   @berman-thm bizonyításában, ha nem találtunk kielégítő értékadást a fában
   DFS-el, akkor legfeljebb $n dot n^c$ lépést tettünk. Ha viszont találtunk
   kielégítő értékadást, akkor még gyorsabban megtaláltuk mint az előző esetben.
@@ -464,21 +462,63 @@ in L$-re.
 ]
 
 #proof[
-  #text(red)[*TODO*]
+  Legyen $L in #BPP$, ekkor tudjuk, hogy létezik egy $T$ probabilisztikus TG ami $1/2^n$
+  valószínűséggel vét csak hibát $x in^? L$ eldöntésekor.
+
+  Tehát $T$ véletlen biteket használ. Legyen $S_x$ azon véletlen bitek halmaza,
+  melyre ha $r in S_x$ és $x in L$ akkor $T(x, r)$ elfogad.
+
+  Mivel a hiba korlátolt ennél a TG-nél, ezért $abs(S_x) >= (1 - 2^(-n)) 2^m$,
+  mert a hiba valószínűsége $abs(S_x)\/2^m$, mert $m$ hosszú véletlen biteket
+  használhat a TG.
+
+  Legyen $FF_2^m$ az $m$ bites számok halmaza.
+
+  @prop-sx-fedes -et alkalmazva látszik, hogy
+  $
+    x in L <==> exists r_1, r_2, dots, r_k in FF_2^m : forall z in FF_2^m"-re" \
+    T "elfogadja" x"-et legalább egy" z+r_i"-re"
+  $
+  ami pont a definíciója annak, hogy $L in Sigma_2$.
+
+  Tehát beláttuk, hogy $#BPP subset.eq Sigma_2$. Továbbá, mivel $#BPP = #coBPP$ és $"co-"Sigma_2 = Pi_2$ így
+  $ #coBPP subset.eq "co-"Sigma_2 ==> #BPP subset.eq Pi_2. $
 ]
 
 #proposition[
-  $FF_2^m$ $S_X$ _kevés_ eltolásával fedhető, ha $x in L$. \
-  Azaz $abs(S_X) >= (1 - 2^(-n))2^m$. \
-  Azaz $exists r_1, dots, r_k in FF_2^m$, ahol $k = ceil(m/n)+1$
-  úgy, hogy
+  // $FF_2^m$ $S_X$ _kevés_ eltolásával fedhető, ha $x in L$. \
+  Ha $abs(S_x) >= (1 - 2^(-n))2^m$ akkor $exists r_1, dots, r_k in FF_2^m$, ahol
+  $k = ceil(m/n)+1$, úgy hogy
   $
-    union.big_(i=1)^k (S_X + r_i) = FF_2^m.
+    union.big_(i=1)^k (S_x + r_i) = FF_2^m.
   $
-]
+]<prop-sx-fedes>
 
 #proof[
-  #text(red)[*TODO*]
+  Célunk megmutatni, hogy $ PP [union.big_(i=1)^k (S_x + r_i) != FF_2^m] < 1/2. $
+
+  Legyen $z in FF_2^m$. Ekkor $z + r$ is véletlen vektor, mert egy véletlen
+  vektor eltoltja is véletlen. Így
+  $
+    PP_r [z in.not S_x + r] = PP_r [z + r in.not S_x] <= 2^(-n).
+  $
+
+  Ha veszünk $k$ darab független véletlen $r_1, dots, r_k in FF_2^m$ vektort, akkor
+  $
+    PP [z in.not union.big_(i=1)^k (S_x + r_i)] <= (2^(-n))^k = 2^(-n k).
+  $
+
+  Továbbá
+  $
+    PP [exists z in.not union.big_(i=1)^k (S_x + r_i)] <= 2^(-n k) dot 2^m <= 1/2,
+  $
+  ahol az utolsó egyenlőtlenséget pont $k = ceil(m/n) + 1$ választásával kapjuk.
+  Tehát
+  $
+    PP [forall z in union.big_(i=1)^k (S_x + r_i)] >= 1/2,
+  $
+  ami azt jelenti, hogy tudunk választani $r_1, dots, r_k$ véletlen vektorokat,
+  hogy $S_x$-et ezekkel eltolva már fedjük $FF_2^m$-et.
 ]
 
 #pagebreak()

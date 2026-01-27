@@ -12,7 +12,7 @@
   *Bonyolultságelmélet jegyzet*
 
   #text(12pt)[
-    Készítették Grolmusz Vince előadásai alapján a 2025/25. évi hallgatók
+    Készítették Grolmusz Vince előadásai alapján a 2025/26. évi hallgatók
   ]
 
   #text(12pt)[
@@ -20,9 +20,10 @@
   ]
 
   #text(12pt)[
-    2025. ősz
+    #datetime.today().year()-#datetime.today().month()-#datetime.today().day()
   ]
 ])
+
 #pagebreak()
 
 #outline()
@@ -40,4 +41,14 @@
 #include "chapter5.typ"
 
 #include "chapter6.typ"
+
+#include "chapter7.typ"
+
+#include "chapter8.typ"
+
+#include "chapter9.typ"
+
+#include "chapter10.typ"
+
+#include "chapter11.typ"
 

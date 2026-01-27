@@ -381,7 +381,7 @@ melynek funkcionális formájában $2^(n-1)$-ed fokon fog szerepelni $(x_1 + c)$
 
   Feltéve hogy $f equiv.not f' (mod p)$, akkor
   $
-    PP((f - f')(xi) = 0) approx 1/2^n,
+    PP [(f - f')(xi) = 0] approx 1/2^n,
   $
   azaz annak a valószínűsége, hogy a két polinom értéke pont megegyezik
   $xi$-ben exponenciálisan kicsi. Mivel $p > 2^n$  különböző szám lehet $xi$ és

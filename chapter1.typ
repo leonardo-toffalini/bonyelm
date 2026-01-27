@@ -27,17 +27,6 @@
 )
 
 = Kommunikációs játékok
-#text(red)[
-  *Ennek a fejezetnek a nagy resze (majdnem minden) a
-  szamitastudomany jegyzetbol lett atemelve.*
-]
-
-#text(red)[
-  *Ezt a fejezetet ujra kell olvasni es megnezni mekkora az atfedes a
-  szamitastudomanyon elhangzottak es a bonyelm-en elhangzottak kozott. A fo
-  tetelek megtalahatok bizonyitasokkal: Teglalap fedes, Mehlhorn--Schmidt,
-  AUY*
-]
 
 Cél: van két játékos, akik bármit ki tudnak számolni gyorsan, de egymás között nehezen kommunikálnak.
 
@@ -229,7 +218,7 @@ Ennek a bizonyításához kell a következő definíció és tétel.
   Következik, hogy $kappa_1 ("ID") = n$.
 ]
 
-#proof[Az ND kommunikációs bonyolultság jellemzése fedő téglalapokkal][
+#proof[@NDKB-jell][
 
   *($kappa_1 (f) <= t$)*
 

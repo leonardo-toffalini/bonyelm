@@ -1,6 +1,7 @@
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
 #import "@preview/cetz:0.4.2": canvas, draw, tree
+#import "common.typ": *
 #show: thmbox-init()
 
 #let P = $"P"$
@@ -274,9 +275,21 @@
   mérete legalább $ 2^(1/2 n^(1/(2k))). $
 ]
 
+#proof[
+  #text(red)[*TODO*]
+]
+
 #remark[
   A bizonyítás a következő cikk alapján hangzott el előadáson:
   #link("https://dl.acm.org/doi/pdf/10.1145/28395.28404")
+]
+
+#theorem[
+  $ #BPP subset.eq #Ppoly $
+]
+
+#proof[
+  #text(red)[*TODO*]
 ]
 
 #pagebreak()
