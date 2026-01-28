@@ -184,6 +184,18 @@ $
   Ha $#P = #NP$, akkor nincs biztonságos polinomiális idejű véletlenszám-generátor.
 ]
 
+#proof[
+  Tegyük fel, hogy $#P = #NP$ és létezik egy $G(x)$ biztonságos
+  pszeudovéletlenszám-generátor.
+
+  Legyen $L := {y in {0, 1}^N : exists s in {0, 1}^n, G(s) = y}$. Természetesen
+  $L in #NP$, mivel $s$ egy polinomiális tanu. Mivel $#P = #NP$, ezért létezik
+  egy polinomiális $cal(A)$ algoritmus, ami felismeri $L$-et. Tehát adott $x in
+  {0, 1}^N$-ről eldönti polinom időben, hogy $x in L$ vagy sem. Más szóval
+  $cal(A)$ sikeresen teszteli, hogy egy generált vagy egy valódi véletlent
+  adunk neki. Tehát $G$ nem egy biztonságos pszeudovéletlenszám-generátor.
+]
+
 #definition[Egyirányú függvény][
   Egy $f : {0,1}^* -> {0,1}^*$ függvényt egyirányúnak nevezünk, ha
   + létezik egy $c >= 1$ konstans, melyre $abs(x)^(1/c) < abs(f(x)) < abs(x)^c$;

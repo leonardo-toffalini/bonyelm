@@ -196,7 +196,7 @@
       import draw: *
       let encircle(i) = {
         std.box(baseline: 2pt, std.circle(stroke: .5pt, radius: .6em)[
-          #move(dx: -0.36em, dy: -1.1em, $#i$)
+          #move(dx: -0.33em, dy: -0.38em, $#i$)
         ])
       }
 
