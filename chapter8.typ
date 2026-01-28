@@ -1,5 +1,3 @@
-#set text(font: "Times New Roman")
-
 #import "common.typ": *
 #show: thmbox-init()
 

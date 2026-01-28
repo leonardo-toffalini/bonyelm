@@ -15,4 +15,5 @@
 #let NC1 = $bold("NC"^1)$
 #let SAT = $"SAT"$
 #let Ppoly = $#P\/"poly"$
+#let NEGL = $"NEGL"$
 

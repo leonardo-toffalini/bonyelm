@@ -1,3 +1,7 @@
+#set text(size: 12pt, font: "New Computer Modern Math")
+#set par(justify: true, first-line-indent: 1em)
+#set page(margin: 4em, numbering: "1")
+
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
 #import "@preview/cetz:0.4.2": canvas, draw, tree
@@ -62,9 +66,10 @@
   #align(center)[
   #canvas({
       import draw: *
+
       let encircle(i) = {
         std.box(baseline: 2pt, std.circle(stroke: .5pt, radius: .6em)[
-          #move(dx: -0.36em, dy: -1.1em, $#i$)
+          #move(dx: -0.33em, dy: -0.38em, $#i$)
         ])
       }
 
