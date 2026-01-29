@@ -2,7 +2,7 @@
 
 // #set text(size: 12pt, font: "Times New Roman")
 #set text(size: 12pt, font: "New Computer Modern Math")
-#set par(justify: true, first-line-indent: 1em)
+#set par(justify: true, first-line-indent: 0em)
 #set page(margin: 4em, numbering: "1")
 
 #show heading.where(level: 1): set text(size: 18pt)

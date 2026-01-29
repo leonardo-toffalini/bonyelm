@@ -1,6 +1,7 @@
 #import "@preview/thmbox:0.3.0": *
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge, shapes
 #import "@preview/cetz:0.4.2": canvas, draw, tree
+#import "common.typ": *
 #show: thmbox-init()
 
 #let P = $"P"$
@@ -173,9 +174,36 @@ tudunk számolni bármilyen Boole függvényt. Ennek a következménye, hogy
 exponenciálisan sok processzorral minden Boole függvényt ki tudunk számolni
 $O(1)$ időben.
 
-#text(red)[*Csánky tétele TODO*]
+#theorem[Csánky--Berkowitz][
+  Egy $A in RR^(n times n)$ mátrix determinánsát ki lehet számolni $n^5$
+  processzorral $log^2 n$ időben, csak összeadásokkal és szorzásokkal.
+]
 
-#text(red)[*Teljes párosítás páros gráfban TODO*]
+#proof[
+  Ez a bizonyítás Csisztovtól származik. \ segédanyag: #link("https://www.cs.cornell.edu/courses/cs6820/2022fa/Handouts/Chistov.pdf")
+
+  #text(red)[*TODO*]
+]
+
+#corollary[
+  Páros gráfban teljes párosítás létezését el tudjuk dönteni ugyanannyi
+  erőforrással amennyi kell determináns számoláshoz.
+]
+
+#proof[
+  Legyen
+  $
+    C_(i,j) := cases(x_(i,j) &quad "ha" (v_i v_j) in E, 0 &quad "különben")
+  $
+
+  Tehát az adjecencia mátrix, csak ahelyett hogy $1$-et írnánk az élek helyére
+  egy változót írunk. Ha ennek a mátrixnak kiszámoljuk a determinánsát, akkor
+  kapunk egy többváltozós függvényt. Ez a függvény pontosan akkor nem lesz
+  azonosan nulla függvény, ha van teljes párosítás a gráfban.
+
+  Azt, hogy egy függvény nem azonosan nulla le tudjuk tesztelni $#RP$
+  értelemben a Schwartz lemmával.
+]
 
 #proposition[
   Adott $n$ számot tudunk rendezni $n$ processzorral $O(log^2 n)$ időben.
